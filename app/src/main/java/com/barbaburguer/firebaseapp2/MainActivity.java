@@ -15,6 +15,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        referencia.child("pontos").setValue("100");
+        //referencia.child("pontos").setValue("300");
+        //referencia.child("usuarios").child("nome").setValue("Victor");
+        DatabaseReference usuarios = referencia.child("usuarios");
+
+        Usuario usuario = new Usuario();
+        usuario.setNome("Victor");
+        usuario.setSobrenome("Frazatto");
+        usuario.setIdade(28);
+        usuarios.child("001").setValue(usuario);
     }
 }
