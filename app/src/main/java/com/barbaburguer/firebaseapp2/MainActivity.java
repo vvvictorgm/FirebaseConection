@@ -24,18 +24,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*Verificar usuario logado*/
+        usuario.signInWithEmailAndPassword("victorfrazatto@hotmail.com", "victorjava").addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Log.i("SignIn", "Sucesso ao logar usuário");
+                }else{
+                    Log.i("SingIn", "Erro ao logar usuário");
+                }
+            }
+        });;
+
+        /* deslogar usuario
+        usuario.signOut();
+
+
+         */
+        //Verificar usuario logado
 
         if(usuario.getCurrentUser() != null){
-            Log.i("CreateUser", "Usuario logado");
+            Log.i("CurrentUser", "Usuario logado");
 
         }else{
-            Log.i("CreateUser", "Usuario não logado");
+            Log.i("CurrentUser", "Usuario não logado");
 
 
         }
-
-        /*Cadastrando um usuario
+/*
+       Cadastrando um usuario
         usuario.createUserWithEmailAndPassword("victorfrazatto@hotmail.com","victorjava")
                 .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
