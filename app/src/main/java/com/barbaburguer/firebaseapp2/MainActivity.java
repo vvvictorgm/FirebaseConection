@@ -24,6 +24,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DatabaseReference usuarios = referencia.child("usuarios");
+
+        Usuario usuario = new Usuario();
+        usuario.setNome("Mariana");
+        usuario.setSobrenome("Matuo");
+        usuario.setIdade(25);
+
+        usuarios.push().setValue(usuario);
+
+
+
+        /*
         usuario.signInWithEmailAndPassword("victorfrazatto@hotmail.com", "victorjava").addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -33,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("SingIn", "Erro ao logar usuário");
                 }
             }
-        });;
+        });
 
-        /* deslogar usuario
+        //deslogar usuario
         usuario.signOut();
 
 
-         */
+
         //Verificar usuario logado
 
         if(usuario.getCurrentUser() != null){
@@ -50,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
-/*
-       Cadastrando um usuario
+
+       //Cadastrando um usuario
         usuario.createUserWithEmailAndPassword("victorfrazatto@hotmail.com","victorjava")
                 .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -80,9 +92,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-        /*
-
         Usuario usuario = new Usuario();
         usuario.setNome("Victor");
         usuario.setSobrenome("Frazatto");
@@ -105,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         produtos.child("002").setValue(produto);
 
          */
+
 
 
 
