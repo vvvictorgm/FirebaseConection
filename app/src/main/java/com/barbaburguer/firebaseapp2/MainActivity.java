@@ -1,11 +1,16 @@
 package com.barbaburguer.firebaseapp2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseReference referencia = FirebaseDatabase.getInstance().getReference();
@@ -14,19 +19,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //referencia.child("pontos").setValue("300");
-        //referencia.child("usuarios").child("nome").setValue("Victor");
-        /*
         DatabaseReference usuarios = referencia.child("usuarios");
+        DatabaseReference produtos = referencia.child("produtos");
+
+        usuarios.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+        /*
+
         Usuario usuario = new Usuario();
         usuario.setNome("Victor");
         usuario.setSobrenome("Frazatto");
         usuario.setIdade(28);
         usuarios.child("001").setValue(usuario);
 
-         */
-        DatabaseReference produtos = referencia.child("produtos");
+
+
         Produtos produto = new Produtos();
         produto.setDescricao("notebook de alta perfomance");
         produto.setMarca("Avell");
@@ -39,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         produto.setPreco(9999);
 
         produtos.child("002").setValue(produto);
+
+         */
 
 
 
