@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,12 +27,53 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseReference usuarios = referencia.child("usuarios");
 
-        Usuario usuario = new Usuario();
-        usuario.setNome("Mariana");
-        usuario.setSobrenome("Matuo");
-        usuario.setIdade(25);
+        //encontrar usuario no banco de dados pelo código (necessário saber qual o código)
+        //DatabaseReference usuarioPesquisa = usuarios.child("-MN53beovEBiZMz5Zu6B");
 
-        usuarios.push().setValue(usuario);
+        //encontrar usuario pela pesquisa do "nome"
+        //Query usuarioPesquisa = usuarios.orderByChild("nome").equalTo("Mariana");
+
+        //encontrar todos os usuarios limitado pelo int dentro do limitToFirst (no caso será os primeiros da lista)
+        //Query usuarioPesquisa = usuarios.orderByKey().limitToFirst(3);
+
+        //encontrar todos os usuarios limitado pelo int dentro do limitToLast (no caso será os ultimos da lista)
+        //Query usuarioPesquisa = usuarios.orderByKey().limitToLast(3);
+
+        //>= Maior ou igual
+        //Query usuarioPesquisa = usuarios.orderByChild("idade").startAt(50);
+
+        //<= Menor ou igual
+        //Query usuarioPesquisa = usuarios.orderByChild("idade").endAt(30);
+
+        /*Entre dois valores
+        Query usuarioPesquisa = usuarios.orderByChild("idade")
+                .startAt(25)
+                .endAt(30);
+
+         */
+
+        //filtrar palavras
+        Query usuarioPesquisa = usuarios.orderByChild("nome")
+                .startAt("M")
+                .endAt("M" +"\uf8ff");
+
+
+        usuarioPesquisa.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.i("Dados usuario", snapshot.getValue().toString());
+
+                //outra forma de conseguir os dados
+                //Usuario dadosUsuario = snapshot.getValue(Usuario.class);
+                //Log.i("Dados Usuário: ", "nome: "+ dadosUsuario.getNome()+"idade:" + dadosUsuario.getIdade());
+               }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
 
 
